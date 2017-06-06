@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">	
+<title>九宫格 抽奖转盘演示</title>
+<style type="text/css">
+#lottery{width:454px;margin:100px auto 0}
+#lottery table td{width:150px;height:150px;text-align:center;vertical-align:middle;background-color:#ccc;font-size:24px;color:#333}
+#lottery table td a{width:150px;height:150px;line-height:150px;display:block;text-decoration:none}
+#lottery table td.active{color:red;background-color:yellow}
+</style>
+</head>
+<body>
+<div id="lottery">
+	<table>
+		<tr>
+			<td class="lottery-unit lottery-unit-1">1</td>
+			<td class="lottery-unit lottery-unit-2">2</td>
+			<td class="lottery-unit lottery-unit-3">3</td>
+		</tr>
+		<tr>
+			<td class="lottery-unit lottery-unit-8">8</td>
+			<td><a href="#" id="start-lottery">开始</a></td>
+			<td class="lottery-unit lottery-unit-4">4</td>
+		</tr>
+		<tr>
+			<td class="lottery-unit lottery-unit-7">7</td>
+			<td class="lottery-unit lottery-unit-6">6</td>
+			<td class="lottery-unit lottery-unit-5">5</td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/lottery_utf8.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var loot = new lottery();
+	loot.init({
+	    container:'#lottery',
+	    items:'.lottery-unit',
+	    focusClass:'active',
+	    loop:3
+	});
+
+	$("#start-lottery").click(function(){
+		if(loot.isStart==false){
+            // 当抽奖未执行时才进来,防止连点
+            var index = 2,coupon = 'WAWEYUIO2109DEWQUIO',name='csol2棒球衫';
+            // 启动抽奖
+            loot.start();
+            // 设置中奖元素序号、回调函数
+            loot.stop(index,function(i){
+                alert('恭喜您获得了第'+(i+1)+'项奖品');            
+            });
+        }       
+	});	
+});
+</script>
+</body>
+</html>
